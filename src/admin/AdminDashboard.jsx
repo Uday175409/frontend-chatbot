@@ -178,6 +178,14 @@ export default function AdminDashboard() {
     setMessages([]); // Clear previous messages while loading
     setAiModeEnabled(true); // Reset AI mode when switching sessions (default to enabled)
     
+    // Emit initial AI mode state to backend to ensure consistency
+    setTimeout(() => {
+      socket.emit('toggle-ai-mode', { 
+        sessionId: session.sessionId, 
+        enabled: true 
+      });
+    }, 100);
+    
     console.log('✅ Session selection completed');
     console.log('🤖 AI mode reset to: true\n');
   };
